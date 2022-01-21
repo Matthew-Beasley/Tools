@@ -48,7 +48,7 @@ app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 app.get('/', csrfProtection, (req, res, next) => {
   try {
-    res.cookie('CSRF_token', req.csrfToken()).sendFile(path.join(__dirname, 'index.html'))
+    res.cookie('CSRF_token', req.csrfToken()).sendFile(path.join(__dirname, '/dist/index.html'))
   } catch (error) {
     next(error);
   }

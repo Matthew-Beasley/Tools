@@ -2,12 +2,13 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
 
 const config = {
-    entry: './src/index.js',
+    entry: './index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
@@ -15,7 +16,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
-
+        new HtmlWebpackTagsPlugin({ tags: ['index.js'], append: true })
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
