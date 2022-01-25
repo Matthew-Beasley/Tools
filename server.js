@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
-const app = express();
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
 
+const app = express(), DIST_DIR = __dirname, HTML_FILE = path.join(DIST_DIR, 'index.html')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -23,6 +23,7 @@ const csrfProtection = csurf({
   cookie: true
 });
 
+app.use(express.static(DIST_DIR))
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -44,11 +45,10 @@ app.use((req, res, next) => {
 });
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
-
-
+console.log(path.join(__dirname, 'dist/index.html'))
 app.get('/', csrfProtection, (req, res, next) => {
   try {
-    res.cookie('CSRF_token', req.csrfToken()).sendFile(path.join(__dirname, '/dist/index.html'))
+    res.cookie('CSRF_token', req.csrfToken()).sendFile(HTML_FILE)
   } catch (error) {
     next(error);
   }
