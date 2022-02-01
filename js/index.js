@@ -1,53 +1,20 @@
 const displayData = (data) => {
-  let html = `<ul id="datalist">`;
-  //const usedHeadings = new Set;
-  const entries = Object.entries(data);
-  //console.log(entries)
-  for (let i = 0; i < entries.length; i++) {
-    const key = entries[i][0];
-    const value = entries[i][1];
-    if (typeof(value) === 'string') {
-      html += `<li class="toplist">${key}: ${value}</li>`;
-    } else  if (typeof(value) === 'object') {
-      const secondEntries = Object.entries(value);
-      html += `<li class="toplist">${key}</li>`;
-      for (let k = 0; k < secondEntries.length; k++) {
-        const secondKey = secondEntries[k][0];
-        const secondValue =secondEntries[k][1];
-        if (typeof(secondValue) === 'string' && secondKey !== 'id' && secondKey !== 'niceName') {
-          html += `<li class=secondarylist>${secondKey}: ${secondValue}</li>`;
-        } else if (secondValue === 'options') {
-          html += `,li class="secondarylist">${secondKey}</li>`;
-        } else if (typeof(secondValue) === 'object') {
-          const thirdEntries = Object.entries(secondValue);
-          //html += `<li class="thirdlist">${secondKey}</li>`;
-          for (let j = 0; j < thirdEntries.length; j++) {
-            const thirdKey = thirdEntries[j][0];
-            const thirdValue = thirdEntries[j][1];
-            if (typeof(thirdValue) === 'string') {
-              html += `<li class="fourthlist">${thirdKey} ${thirdValue}</li>`;
-            } else if (typeof(thirdValue) === 'object'){
-              const fourthEntries = Object.entries(thirdValue);
-              for (let l = 0; l < fourthEntries.length; l++) {
-                const fourthKey = fourthEntries[l][0];
-                const fourthValue = fourthEntries[l][1];
-                //html += `<li class="fifthlist">${fourthKey}</li>`;
-                const fifthEntries = Object.entries(fourthValue);
-                for (let m = 0; m < fifthEntries.length; m++) {
-                  const fifthKey = fifthEntries[m][0];
-                  const fifthValue = fifthEntries[m][1];
-                  if (typeof(fifthValue) !== 'object' && fifthKey !== 'id') {
-                    html += `<li class="sixthlist">${fifthKey} ${fifthValue}</li>`;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  const values = Object.values(data);
+  for(let i = 0; i < values.length; i++) {
+    //values[i] = values[i].replace(/,/g, ' ');
+    console.log(values[i])
   }
-  html += '</ul>'
+  let html = JSON.stringify(data);
+  html = html
+  .replace(/,/g,'<br>')
+  .replace(/"/g, '')
+  .replace(/{/g, '')
+  .replace(/}/g, '')
+  .replace(/\[/g, '')
+  .replace(/]/g, '')
+  .replace(/:/g, ':  ')
+  .replace(/\\/g, ' ')
+  html = '<b>' + html;
   vinDisplay.innerHTML = html;
 }
 
