@@ -1,0 +1,33 @@
+ul {
+  list-style-type: none;
+}
+
+.toplist {
+  font-weight: bold;
+  color: green;
+}
+
+.secondarylist {
+  color: blue;
+  margin-left: 1rem;
+}
+
+.thirdlist {
+  color: red;
+  margin-left: 2rem;
+}
+
+.fourthlist {
+  color: black;
+  margin-left: 1rem;
+}
+
+.fifthlist {
+  color: saddlebrown;
+  margin-left: 4rem;
+}
+
+.sixthlist {
+  color:slategrey;
+  margin-left: 2rem;
+}
